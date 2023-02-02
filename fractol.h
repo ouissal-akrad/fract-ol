@@ -6,14 +6,15 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 19:55:18 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/01/30 21:55:06 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/02 22:57:05 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 #define FRACTOL_H
 
-#define MAX_ITERATIONS 50
+#define MAX_ITERATIONS 15
+
 typedef struct fractol
 {
 	//pixels:
@@ -42,8 +43,9 @@ typedef struct fractol
 void	mandelbrot(t_fractol *p);
 void	Tricorn(t_fractol *p);
 void	burning_ship(t_fractol *p);
+void	julia(t_fractol *p);
+int		ft_close(int keycode, t_fractol *vars);
 void	my_mlx_pixel_put(t_fractol *data, int x, int y, int color);
-
 #include "libft/libft.h"
 #include <mlx.h>
 #include <stdio.h>

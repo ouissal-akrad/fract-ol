@@ -6,19 +6,12 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:13:37 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/01/30 21:53:44 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/02 22:18:56 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	my_mlx_pixel_put(t_fractol *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
 int main(int ac, char *av[])
 {
 	t_fractol p;
@@ -30,12 +23,17 @@ int main(int ac, char *av[])
 	if(ac != 2)
 		return(write(2,"ERROR !\n",9), 1);
 	if(ft_strncmp(av[1],"Mandelbrot",11) == 0)
+	{
 		mandelbrot(&p);
+	}
+	if(ft_strncmp(av[1],"Julia",6) == 0)
+		julia(&p);
 	if(ft_strncmp(av[1],"Tricorn",8) == 0)
 		Tricorn(&p);
 	if(ft_strncmp(av[1],"Burning_ship",13) == 0)
 		burning_ship(&p);
 	mlx_put_image_to_window(p.mlx, p.win, p.img, 0, 0);
+	mlx_key_hook(p.win,ft_close,&p);
     mlx_loop(p.mlx);
     return 0;
 }
