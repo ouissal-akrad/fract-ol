@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:10:56 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/03 00:21:50 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/05 02:34:51 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void mandelbrot(t_fractol *p)
 	}
 }
 
-void julia(t_fractol *p)
+void julia(t_fractol *p,char *av[])
 {
 	p->y = 0;
 
@@ -55,8 +55,9 @@ void julia(t_fractol *p)
 			p->zi =((p->y * 4) / 800) - 2;
 			p->zr =((p->x * 4) / 800) - 2;
 
-			p->cr =  -0.8;
-			p->ci =  0.2321;
+			p->cr =  ft_atof(av[2]);
+			p->ci = ft_atof(av[3]);
+			printf("%f | %f\n",p->cr,p->ci);
 			p->iteration = 0;
 			while(((p->zr * p->zr) + (p->zi * p->zi)) < 4.0 && p->iteration < MAX_ITERATIONS)
 			{
@@ -66,9 +67,9 @@ void julia(t_fractol *p)
 				p->iteration++;
 			}
 			if (p->iteration == MAX_ITERATIONS)
-				my_mlx_pixel_put(p,p->x ,p->y,0x965D62);
+				my_mlx_pixel_put(p,p->x ,p->y,0xC3ACD0);
 			else
-				my_mlx_pixel_put(p,p->x ,p->y,0xBA7967);
+				my_mlx_pixel_put(p,p->x ,p->y,0x20262E);
 			p->x++;
 		}
 		p->y++;
