@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:10:56 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/05 02:34:51 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/05 02:42:13 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void julia(t_fractol *p,char *av[])
 
 			p->cr =  ft_atof(av[2]);
 			p->ci = ft_atof(av[3]);
-			printf("%f | %f\n",p->cr,p->ci);
+			// printf("%f | %f\n",p->cr,p->ci);
 			p->iteration = 0;
 			while(((p->zr * p->zr) + (p->zi * p->zi)) < 4.0 && p->iteration < MAX_ITERATIONS)
 			{
