@@ -6,11 +6,21 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:13:37 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/05 02:42:31 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/06 22:57:35 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int     ft_strcmp(char *s1, char *s2)
+{
+    int     i;
+
+    i = 0;
+    while ((s1[i] != '\0' || s2[i] != '\0') && s1[i] == s2[i])
+        i++;
+    return (s1[i] - s2[i]);
+}
 
 double ft_atof(char *str)
 {
@@ -46,11 +56,18 @@ double ft_atof(char *str)
     }
     return (sign * value / power);
 }
+
+// void tt()
+// {
+// 	system("leaks Fract-ol");
+// }
 int main(int ac, char *av[])
 {
+	// atexit(tt);
 	t_fractol p;
 	int i;
 	i = 0;
+	p.max_r = 800;
     p.mlx = mlx_init();
     p.win = mlx_new_window(p.mlx, 800, 800, "Fract-ol");
 	p.img = mlx_new_image(p.mlx, 800, 800);
@@ -59,50 +76,21 @@ int main(int ac, char *av[])
 	// 	return(write(2,"ERROR !\n",9), 1);
 	if(ac == 2)
 	{
-		if(ft_strncmp(av[1],"Mandelbrot",11) == 0)
-		{
+		if(ft_strcmp(av[1],"Mandelbrot") == 0)
 			mandelbrot(&p);
-		}
-		if(ft_strncmp(av[1],"Tricorn",8) == 0)
+		if(ft_strcmp(av[1],"Tricorn") == 0)
 			Tricorn(&p);
-		if(ft_strncmp(av[1],"Burning_ship",13) == 0)
+		if(ft_strcmp(av[1],"Burning_ship") == 0)
 			burning_ship(&p);
 	}
-	if(ac == 4 && (ft_strncmp(av[1],"Julia",6) == 0))
+	if(ac == 4 && (ft_strcmp(av[1],"Julia") == 0))
 	{
 		julia(&p,av);
 	}
 	mlx_put_image_to_window(p.mlx, p.win, p.img, 0, 0);
-	mlx_key_hook(p.win,ft_close,&p);
+	// mlx_key_hook(p.win,keys, &p);
+	mlx_mouse_hook(p.win,keys,&p);
+	mlx_hook(p.win, 17, 0, ft_close_mouse, &p);
     mlx_loop(p.mlx);
     return 0;
 }
-// }
-// 	int		i;
-// 	double	zr;
-// 	double	zi;
-// 	double 	ci;
-// 	double 	cr;
-// 	double	tmp_zi;
-// 	i = 0;
-
-// 	zr = 0;
-// 	zi = 0;
-// 	printf("%f | %f",zi , zr);
-// 	if(ac != 2)
-// 		return(write(2,"ERROR !\n",9), 1);
-// 	if(ft_strncmp(av[1],"Jolia",6) == 0)
-// 		write(1,"Jolia\n",7);
-// 	else if(ft_strncmp(av[1],"Mandelbrot",11) == 0)
-// 	{
-// 		while (i < 50)
-// 			{
-// 				if ((zr * zr + zi * zi) > 4.0)
-// 					break ;
-// 				tmp_zi = 2 * zr * zi + ci;
-// 				zr = zr * zr - zi * zi + cr;
-// 				zi = tmp_zi;
-// 				mlx_pixel_put(mlx, win, zi, zr, 0xFF0000);
-// 				i++;
-// 			}
-// 	}

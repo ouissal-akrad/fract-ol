@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:10:56 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/05 02:42:13 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/06 22:42:13 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void mandelbrot(t_fractol *p)
 		p->x = 0;
 		while(p->x < 800)
 		{
-			p->zi =0;
-			p->zr =0;
-			p->cr =((p->x * 4) / 800) - 2;
-			p->ci =((p->y * 4) / 800) - 2;
+			p->zi = 0;
+			p->zr = 0;
+			p->cr =((p->x * 4) / p->max_r) - 2;
+			p->ci =((p->y * 4) / p->max_r) - 2;
 			p->iteration = 0;
 			while(((p->zr * p->zr) + (p->zi * p->zi)) < 4.0 && p->iteration < 50)
 			{
@@ -69,7 +69,7 @@ void julia(t_fractol *p,char *av[])
 			if (p->iteration == MAX_ITERATIONS)
 				my_mlx_pixel_put(p,p->x ,p->y,0xC3ACD0);
 			else
-				my_mlx_pixel_put(p,p->x ,p->y,0x20262E);
+				my_mlx_pixel_put(p,p->x ,p->y,0x20262E * (p->iteration * MAX_ITERATIONS));
 			p->x++;
 		}
 		p->y++;
