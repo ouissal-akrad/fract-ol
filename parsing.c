@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:13:37 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/08 16:13:46 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/08 21:15:39 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ int main(int ac, char *av[])
 	t_fractol p;
 	int i;
 	i = 0;
-	
+
+	p.coef = 1;
 	p.width = 800;
 	p.height = 800;
     p.mlx = mlx_init();

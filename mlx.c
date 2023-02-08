@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:15:38 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/08 17:46:17 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/08 21:19:24 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int	zoom(int keycode, int x, int y, t_fractol *f)
 	if(keycode == 4)
 	{
 		mlx_clear_window(f->mlx,f->win);
-		f->height *= 0.8;
+		f->coef *= 0.8;
 		mandelbrot(f);
 		mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
 	}
 	if(keycode == 5)
 	{
 		mlx_clear_window(f->mlx,f->win);
-		f->height /= 0.8;
+		f->coef /= 0.8;
 		mandelbrot(f);
 		mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
 	}

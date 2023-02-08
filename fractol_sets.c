@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:10:56 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/08 17:55:46 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/08 21:19:35 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void mandelbrot(t_fractol *p)
 		{
 			p->zi = 0;
 			p->zr = 0;
-			p->cr =((p->x * 4) / p->height) - 2;
-			p->ci =((p->y * 4) / p->height) - 2;
+			p->cr =((((p->x / p->coef) * 4) / p->height) - 2.0 / p->coef);
+			p->ci =((((p->y / p->coef) * 4) / p->height) - 2.0 / p->coef);
 			p->iteration = 0;
-			while(((p->zr * p->zr) + (p->zi * p->zi)) < 4.0 && p->iteration < 50)
+			while((((p->zr * p->zr) + (p->zi * p->zi)) < 4.0) && p->iteration < 50)
 			{
 				p->zt =( p->zr * p->zr  - p->zi * p->zi )+ p->cr;
 				p->zi = (2.0 * p->zr * p->zi) + p->ci;

@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 19:55:18 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/08 18:03:58 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/08 21:15:19 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct fractol
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+
+	double coef;
 
 }t_fractol;
 
