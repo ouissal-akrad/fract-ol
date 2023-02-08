@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:13:37 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/06 22:57:35 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/08 16:13:46 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ double ft_atof(char *str)
 
 // void tt()
 // {
-// 	system("leaks Fract-ol");
+// 	system("leaks fractol");
 // }
 int main(int ac, char *av[])
 {
@@ -67,10 +67,12 @@ int main(int ac, char *av[])
 	t_fractol p;
 	int i;
 	i = 0;
-	p.max_r = 800;
+	
+	p.width = 800;
+	p.height = 800;
     p.mlx = mlx_init();
-    p.win = mlx_new_window(p.mlx, 800, 800, "Fract-ol");
-	p.img = mlx_new_image(p.mlx, 800, 800);
+    p.win = mlx_new_window(p.mlx, p.width, p.height, "Fract-ol");
+	p.img = mlx_new_image(p.mlx, p.width, p.height);
 	p.addr = mlx_get_data_addr(p.img, &p.bits_per_pixel, &p.line_length,&p.endian);
 	// if(ac != 2)
 	// 	return(write(2,"ERROR !\n",9), 1);
@@ -84,12 +86,10 @@ int main(int ac, char *av[])
 			burning_ship(&p);
 	}
 	if(ac == 4 && (ft_strcmp(av[1],"Julia") == 0))
-	{
 		julia(&p,av);
-	}
 	mlx_put_image_to_window(p.mlx, p.win, p.img, 0, 0);
-	// mlx_key_hook(p.win,keys, &p);
-	mlx_mouse_hook(p.win,keys,&p);
+	mlx_key_hook(p.win,ft_close_key, &p);
+	mlx_mouse_hook(p.win,zoom,&p);
 	mlx_hook(p.win, 17, 0, ft_close_mouse, &p);
     mlx_loop(p.mlx);
     return 0;
