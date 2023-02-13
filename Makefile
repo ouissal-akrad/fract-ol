@@ -23,7 +23,7 @@ ${LIBFT}	:
 	$(CC) $(CFLAGS) -Imlx -g -c $< -o $@
 
 $(NAME): $(OBJ) ${LIBFT}
-	$(CC) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)  $(LIBFT) -g
+	$(CC) $(OBJ) -lmlx -framework OpenGL -framework AppKit -ofast -o $(NAME)  $(LIBFT) -g
 
 clean:
 	$(RM) $(OBJ)
