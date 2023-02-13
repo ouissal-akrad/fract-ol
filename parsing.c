@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:13:37 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/13 17:33:13 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/14 00:49:14 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int main(int ac, char *av[])
 	t_fractol p;
 	int i;
 	i = 0;
+	p.color_code =  0xE7FE0000;
 	p.max_r = 2;
 	p.min_r = -2;
 	p.max_i = 2;
@@ -77,13 +78,14 @@ int main(int ac, char *av[])
 	p.coef = 1.0;
 	p.width = 800;
 	p.height = 800;
-	p.MAX_ITERATIONS = 50;
+	p.MAX_ITERATIONS = 250;
     p.mlx = mlx_init();
     p.win = mlx_new_window(p.mlx, p.width, p.height, "Fract-ol");
 	p.img = mlx_new_image(p.mlx, p.width, p.height);
 	p.addr = mlx_get_data_addr(p.img, &p.bits_per_pixel, &p.line_length,&p.endian);
 	// if(ac != 2)
 	// 	return(write(2,"ERROR !\n",9), 1);
+	p.tmp_av = av;
 	if(ac == 2)
 	{
 		if(ft_strcmp(av[1],"Mandelbrot") == 0)
@@ -96,7 +98,7 @@ int main(int ac, char *av[])
 	if(ac == 4 && (ft_strcmp(av[1],"Julia") == 0))
 		julia(&p,av);
 	mlx_put_image_to_window(p.mlx, p.win, p.img, 0, 0);
-	mlx_key_hook(p.win,ft_close_key, &p);
+	mlx_key_hook(p.win,key_b, &p);
 	mlx_mouse_hook(p.win,zoom_key_code,&p);
 	mlx_hook(p.win, 17, 0, ft_close_mouse, &p);
     mlx_loop(p.mlx);

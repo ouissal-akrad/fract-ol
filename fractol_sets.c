@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:10:56 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/13 17:12:25 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/14 00:40:00 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void mandelbrot(t_fractol *p)
 				p->iteration++;
 			}
 			if (p->iteration == p->MAX_ITERATIONS)
-				my_mlx_pixel_put(p,p->x ,p->y,0x965D62);
+				my_mlx_pixel_put(p,p->x ,p->y,p->color_code);
 			else
-				my_mlx_pixel_put(p,p->x ,p->y,0xBA7967 * (p->iteration * p->MAX_ITERATIONS));
+				my_mlx_pixel_put(p,p->x ,p->y,p->color_code * (p->iteration + p->MAX_ITERATIONS));
 			p->x++;
 		}
 		p->y++;
@@ -46,7 +46,6 @@ void mandelbrot(t_fractol *p)
 void julia(t_fractol *p,char *av[])
 {
 	p->y = 0;
-
 	while (p->y < 800)
 	{
 		p->x = 0;
@@ -57,8 +56,8 @@ void julia(t_fractol *p,char *av[])
 
 			p->cr =  ft_atof(av[2]);
 			p->ci = ft_atof(av[3]);
-			// printf("%f | %f\n",p->cr,p->ci);
 			p->iteration = 0;
+			// printf("%f | %f\n",p->cr,p->ci);
 			while(((p->zr * p->zr) + (p->zi * p->zi)) < 4.0 && p->iteration < p->MAX_ITERATIONS)
 			{
 				p->zt =( p->zr * p->zr - p->zi * p->zi ) + p->cr;
@@ -67,13 +66,17 @@ void julia(t_fractol *p,char *av[])
 				p->iteration++;
 			}
 			if (p->iteration == p->MAX_ITERATIONS)
-				my_mlx_pixel_put(p,p->x ,p->y,0xC3ACD0);
+			{
+				printf("here\n");
+				my_mlx_pixel_put(p,p->x ,p->y,p->color_code);
+			}
 			else
-				my_mlx_pixel_put(p,p->x ,p->y,0x20262E * (p->iteration * p->MAX_ITERATIONS));
+				my_mlx_pixel_put(p,p->x ,p->y,p->color_code * (p->iteration + p->MAX_ITERATIONS));
 			p->x++;
 		}
 		p->y++;
 	}
+	printf("%d\n",p->iteration);
 }
 
 void Tricorn(t_fractol *p)
@@ -87,8 +90,8 @@ void Tricorn(t_fractol *p)
 		{
 			p->zi =0;
 			p->zr =0;
-			p->cr =((p->x * 4) / 800) - 2;
-			p->ci =((p->y * 4) / 800) - 2;
+			p->cr = (ft_map(p->x,p->width,p->min_i,p->max_r) / p->coef);
+			p->ci = (ft_map(p->y,p->width,p->min_i,p->max_r) / p->coef);
 			p->iteration = 0;
 			while(((p->zr * p->zr) + (p->zi * p->zi)) < 4.0 && p->iteration < p->MAX_ITERATIONS)
 			{
@@ -98,9 +101,9 @@ void Tricorn(t_fractol *p)
 				p->iteration++;
 			}
 			if (p->iteration == p->MAX_ITERATIONS)
-				my_mlx_pixel_put(p,p->x ,p->y,0xFFFFFF);
+				my_mlx_pixel_put(p,p->x ,p->y,p->color_code);
 			else
-				my_mlx_pixel_put(p,p->x ,p->y,0xF1D4D4 * (p->iteration * p->MAX_ITERATIONS));
+				my_mlx_pixel_put(p,p->x ,p->y,p->color_code * (p->iteration + p->MAX_ITERATIONS));
 			p->x++;
 		}
 		p->y++;
@@ -119,8 +122,8 @@ void burning_ship(t_fractol *p)
 			p->zi =0;
 			p->zr =0;
 
-			p->cr =((p->x * 4) / 800) - 2;
-			p->ci =((p->y * 4) / 800) - 2;
+			p->cr = (ft_map(p->x,p->width,p->min_i,p->max_r) / p->coef);
+			p->ci = (ft_map(p->y,p->width,p->min_i,p->max_r) / p->coef);
 			p->iteration = 0;
 			while(((p->zr * p->zr) + (p->zi * p->zi)) <= 4.0 && p->iteration < p->MAX_ITERATIONS)
 			{
@@ -130,9 +133,9 @@ void burning_ship(t_fractol *p)
 				p->iteration++;
 			}
 			if (p->iteration == p->MAX_ITERATIONS)
-				my_mlx_pixel_put(p,p->x ,p->y,0x000000);
+				my_mlx_pixel_put(p,p->x ,p->y,p->color_code);
 			else
-				my_mlx_pixel_put(p,p->x ,p->y,0xAA5656 * (p->iteration * p->MAX_ITERATIONS));
+				my_mlx_pixel_put(p,p->x ,p->y,p->color_code * (p->iteration + p->MAX_ITERATIONS));
 			p->x++;
 		}
 		p->y++;
