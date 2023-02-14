@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:15:38 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/14 00:50:35 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/14 19:22:19 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,19 @@ int key_b(int keycode, t_fractol *f)
 	}
 	if (keycode == KEY_UP)
 	{
-		f->max_i -= h;
-		f->min_i -= h;
+		f->y_trans += 0.5;
 	}
 	else if (keycode == KEY_DOWN)
 	{
-		f->max_i += h;
-		f->min_i += h;
+		f->y_trans -= 0.5;
 	}
 	else if (keycode == KEY_LEFT)
 	{
-		f->max_r -= w;
-		f->min_r -= w;
+		f->x_trans += 0.5;
 	}
 	else if (keycode == KEY_RIGHT)
 	{
-		f->max_r += w;
-		f->min_r += w;
+		f->x_trans -= 0.5;
 	}
 	mlx_clear_window(f->mlx,f->win);
 	func(f);
@@ -107,8 +103,8 @@ void	zoom(int x, int y,double zoom, t_fractol *f)
 	double cy;
 
 	mlx_clear_window(f->mlx,f->win);
-	cx = ft_map(x,f->width,f->min_r,f->max_r);
-	cy = ft_map(y,f->width,f->min_i,f->max_i);
+	cx = ft_map(x,f->width,f->min_r,f->max_r,0,0);
+	cy = ft_map(y,f->width,f->min_i,f->max_i,0,0);
 	f->max_r = (f->max_r - cx) / zoom + cx;
 	f->min_r = (f->min_r - cx) / zoom + cx;
 	f->max_i = (f->max_i - cy) / zoom + cy;

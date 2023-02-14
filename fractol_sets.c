@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:10:56 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/14 00:40:00 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/14 19:21:54 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void mandelbrot(t_fractol *p)
 		{
 			p->zi = 0;
 			p->zr = 0;
-			p->cr = (ft_map(p->x,p->width,p->min_i,p->max_r) / p->coef);
-			p->ci = (ft_map(p->y,p->width,p->min_i,p->max_r) / p->coef);
+			p->cr = (ft_map(p->x,p->width,p->min_i,p->max_r,p->x_trans,0) / p->coef);
+			p->ci = (ft_map(p->y,p->width,p->min_i,p->max_r,0,p->y_trans) / p->coef);
 			p->iteration = 0;
 			while((((p->zr * p->zr) + (p->zi * p->zi)) < 4.0) && p->iteration < p->MAX_ITERATIONS)
 			{
@@ -90,8 +90,8 @@ void Tricorn(t_fractol *p)
 		{
 			p->zi =0;
 			p->zr =0;
-			p->cr = (ft_map(p->x,p->width,p->min_i,p->max_r) / p->coef);
-			p->ci = (ft_map(p->y,p->width,p->min_i,p->max_r) / p->coef);
+			p->cr = (ft_map(p->x,p->width,p->min_i,p->max_r,0,0) / p->coef);
+			p->ci = (ft_map(p->y,p->width,p->min_i,p->max_r,0,0) / p->coef);
 			p->iteration = 0;
 			while(((p->zr * p->zr) + (p->zi * p->zi)) < 4.0 && p->iteration < p->MAX_ITERATIONS)
 			{
@@ -122,8 +122,8 @@ void burning_ship(t_fractol *p)
 			p->zi =0;
 			p->zr =0;
 
-			p->cr = (ft_map(p->x,p->width,p->min_i,p->max_r) / p->coef);
-			p->ci = (ft_map(p->y,p->width,p->min_i,p->max_r) / p->coef);
+			p->cr = (ft_map(p->x,p->width,p->min_i,p->max_r,0,0) / p->coef);
+			p->ci = (ft_map(p->y,p->width,p->min_i,p->max_r,0,0) / p->coef);
 			p->iteration = 0;
 			while(((p->zr * p->zr) + (p->zi * p->zi)) <= 4.0 && p->iteration < p->MAX_ITERATIONS)
 			{

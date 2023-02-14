@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 19:55:18 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/13 22:01:16 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/14 19:21:37 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ typedef struct fractol
 	int		line_length;
 	int		endian;
 
+
+	double x_trans;
+	double y_trans;
+
 	double coef;
 	char **tmp_av;
 
@@ -72,7 +76,7 @@ void		func(t_fractol *p);
 void		my_mlx_pixel_put(t_fractol *data, int x, int y, int color);
 void		zoom(int x, int y,double zoom, t_fractol *f);
 int			zoom_key_code(int keycode, int x, int y, t_fractol *f);
-double		ft_map(int to_map, int width, double min, double max);
+double  ft_map(int to_map, int width, double min, double max,double x, double y);
 void		colors(t_fractol *f);
 //Lib
 #include "libft/libft.h"
