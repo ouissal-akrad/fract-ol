@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:15:38 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/14 19:22:19 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/15 17:14:38 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void func(t_fractol *p)
 	if(ft_strcmp(p->tmp_av[1],"Mandelbrot") == 0)
 		mandelbrot(p);
 	if(ft_strcmp(p->tmp_av[1],"Tricorn") == 0)
-		Tricorn(p);
+		tricorn(p);
 	if(ft_strcmp(p->tmp_av[1],"Burning_ship") == 0)
 		burning_ship(p);
 	// printf("%s | %s\n",p->tmp_av[1],p->tmp_av[2]);
@@ -35,6 +35,7 @@ void colors(t_fractol *f)
 {
 	f->color_code = f->color_code - (f->iteration - f->MAX_ITERATIONS);
 	// printf("here%x\n", (f->iteration * f->MAX_ITERATIONS));
+	printf("%d\n",f->color_code);
 }
 int key_b(int keycode, t_fractol *f)
 {
@@ -54,19 +55,19 @@ int key_b(int keycode, t_fractol *f)
 	}
 	if (keycode == KEY_UP)
 	{
-		f->y_trans += 0.5;
+		f->y_trans -= 0.5;
 	}
 	else if (keycode == KEY_DOWN)
 	{
-		f->y_trans -= 0.5;
+		f->y_trans += 0.5;
 	}
 	else if (keycode == KEY_LEFT)
 	{
-		f->x_trans += 0.5;
+		f->x_trans -= 0.5;
 	}
 	else if (keycode == KEY_RIGHT)
 	{
-		f->x_trans -= 0.5;
+		f->x_trans += 0.5;
 	}
 	mlx_clear_window(f->mlx,f->win);
 	func(f);
@@ -102,13 +103,19 @@ void	zoom(int x, int y,double zoom, t_fractol *f)
 	double cx;
 	double cy;
 
+	double new_cx;
+	double new_cy;
+
 	mlx_clear_window(f->mlx,f->win);
 	cx = ft_map(x,f->width,f->min_r,f->max_r,0,0);
 	cy = ft_map(y,f->width,f->min_i,f->max_i,0,0);
-	f->max_r = (f->max_r - cx) / zoom + cx;
-	f->min_r = (f->min_r - cx) / zoom + cx;
-	f->max_i = (f->max_i - cy) / zoom + cy;
-	f->min_i = (f->min_i - cy) / zoom + cy;
+	f->max_r = (f->max_r - cx) / zoom;
+	f->min_r = (f->min_r - cx) / zoom;
+	f->max_i = (f->max_i - cy) / zoom;
+	f->min_i = (f->min_i - cy) / zoom;
+	new_cx = ft_map(new_cx,f->width,f->min_r,f->max_r,cx,cy);
+	new_cy = ft_map(new_cy,f->width,f->min_r,f->max_r,new_cy,cy);
+	
 	func(f);
 	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
 }
