@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:15:38 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/16 02:45:05 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/16 17:28:32 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void func(t_fractol *p)
 		tricorn(p);
 	if(ft_strcmp(p->tmp_av[1],"Burning_ship") == 0)
 		burning_ship(p);
-
 }
 void	my_mlx_pixel_put(t_fractol *data, int x, int y, int color)
 {
@@ -46,13 +45,13 @@ int key_b(int keycode, t_fractol *f)
 		exit(EXIT_SUCCESS);
 	}
 	if (keycode == KEY_UP)
-		f->y_trans += 0.5;
+		f->y_trans += 0.05;
 	else if (keycode == KEY_DOWN)
-		f->y_trans -= 0.5;
+		f->y_trans -= 0.05;
 	else if (keycode == KEY_LEFT)
-		f->x_trans += 0.5;
+		f->x_trans += 0.05;
 	else if (keycode == KEY_RIGHT)
-		f->x_trans -= 0.5;
+		f->x_trans -= 0.05;
 	mlx_clear_window(f->mlx,f->win);
 	func(f);
 	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
@@ -88,9 +87,8 @@ int	zoom(int keycode,int x, int y, t_fractol *f)
 		f->zoom /= 1.1;
 	newx = ft_map(x,f->max + f->zoom,f->min - f->zoom,f->height,0,0);
 	newy = ft_map(y,f->max + f->zoom,f->min - f->zoom,f->height,0,0);
-
-	f->max += cx - newx;
-	f->min += cy - newy;
+	f->x_trans += -cx + newx;
+	f->y_trans += -cy + newy;
 	func(f);
 	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
 	return(0);

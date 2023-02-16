@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:13:37 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/16 02:35:39 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/16 17:28:18 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ double	ft_atof(char *str)
 void	ft_error(void)
 {
 	write(2, "-------------------------------Guide--------------------------------------\n", 76);
-	write(2, "|                     You have 4 sets of fractol :                       |\n", 76);
+	write(2, "|                        You have 4 fractals :                           |\n", 76);
 	write(2, "| Mandelbrot => ./fractol Mndelbrot                                      |\n", 76);
 	write(2, "| Julia => ./fractol Julia 'real part' 'imaginary part'                  |\n", 76);
 	write(2, "| Tricorn => ./fractol Tricorn                                           |\n", 76);

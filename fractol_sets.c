@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:10:56 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/16 02:40:40 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/16 17:32:01 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	julia(t_fractol *p, char *av[])
 		p->x = 0;
 		while (p->x < 800)
 		{
-			p->zi = ((p->y * 4) / 800) - 2;
-			p->zr = ((p->x * 4) / 800) - 2;
+			p->zr = ft_map(p->x,p->max + p->zoom ,p->min - p->zoom,p->height, p->x_trans, 0);
+			p->zi = ft_map(p->y,p->max + p->zoom ,p->min - p->zoom, p->width, 0, p->y_trans);
 			p->cr = ft_atof(av[2]);
 			p->ci = ft_atof(av[3]);
 			p->iteration = 0;
