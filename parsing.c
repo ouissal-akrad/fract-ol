@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:13:37 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/15 16:55:51 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/16 02:35:39 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,7 @@ double	ft_atof(char *str)
 	return (sign * value / power);
 }
 
-double	ft_map(int to_map, int width, double min, double max, double x, double y)
-{
-	return ((min + (max - min) * to_map / width) - x - y);
-}
-// void tt()
-// {
-// 	system("leaks fractol");
-// }
+
 
 void	ft_error(void)
 {
@@ -79,32 +72,31 @@ void	ft_error(void)
 	exit(2);
 }
 
+void ft_init(t_fractol *p)
+{
+	p->color_code =  0xE7FE0000;
+	p->max = 0;
+	p->min = 0;
+	p->coef = 1.0;
+	p->width = 800.0;
+	p->height = 800.0;
+	p->x_trans = 0;
+	p->y_trans = 0;
+	p->MAX_ITERATIONS = 250;
+	p->zoom = 2.0;
+}
+
 int main(int ac, char *av[])
 {
-	// atexit(tt);
 	t_fractol p;
 	int i;
 	i = 0;
-	p.color_code =  0xE7FE0000;
-	// p.color_code =  0xEEEEEE;
-	p.max_r = 2;
-	p.min_r = -2;
-	p.max_i = 2;
-	p.min_i = -2;
-	p.coef = 1.0;
-	p.width = 800;
-	p.height = 800;
-	p.x_trans = 0;
-	p.y_trans = 0;
-	p.zi = 0;
-	p.zr = 0;
-	p.MAX_ITERATIONS = 250;
+
+	ft_init(&p);
     p.mlx = mlx_init();
     p.win = mlx_new_window(p.mlx, p.width, p.height, "Fract-ol");
 	p.img = mlx_new_image(p.mlx, p.width, p.height);
 	p.addr = mlx_get_data_addr(p.img, &p.bits_per_pixel, &p.line_length,&p.endian);
-	// if(ac != 2)
-	// 	return(write(2,"ERROR !\n",9), 1);
 	p.tmp_av = av;
 	if(ac == 2 || ac == 4)
 		func(&p);
@@ -112,7 +104,7 @@ int main(int ac, char *av[])
 		ft_error();
 	mlx_put_image_to_window(p.mlx, p.win, p.img, 0, 0);
 	mlx_key_hook(p.win,key_b, &p);
-	mlx_mouse_hook(p.win,zoom_key_code,&p);
+	mlx_mouse_hook(p.win,zoom,&p);
 	mlx_hook(p.win, 17, 0, ft_close_mouse, &p);
     mlx_loop(p.mlx);
     return 0;

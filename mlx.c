@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:15:38 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/15 17:14:38 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/16 02:45:05 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void func(t_fractol *p)
 		tricorn(p);
 	if(ft_strcmp(p->tmp_av[1],"Burning_ship") == 0)
 		burning_ship(p);
-	// printf("%s | %s\n",p->tmp_av[1],p->tmp_av[2]);
+
 }
 void	my_mlx_pixel_put(t_fractol *data, int x, int y, int color)
 {
@@ -34,17 +34,9 @@ void	my_mlx_pixel_put(t_fractol *data, int x, int y, int color)
 void colors(t_fractol *f)
 {
 	f->color_code = f->color_code - (f->iteration - f->MAX_ITERATIONS);
-	// printf("here%x\n", (f->iteration * f->MAX_ITERATIONS));
-	printf("%d\n",f->color_code);
 }
 int key_b(int keycode, t_fractol *f)
 {
-	double	w;
-	double	h;
-
-	w = (f->max_r - f->min_r) * STEP;
-	h = (f->max_i - f->min_i) * STEP;
-
 	if (keycode == 8)
 		colors(f);
 	if(keycode == 53 || keycode == 12)
@@ -54,21 +46,13 @@ int key_b(int keycode, t_fractol *f)
 		exit(EXIT_SUCCESS);
 	}
 	if (keycode == KEY_UP)
-	{
-		f->y_trans -= 0.5;
-	}
-	else if (keycode == KEY_DOWN)
-	{
 		f->y_trans += 0.5;
-	}
+	else if (keycode == KEY_DOWN)
+		f->y_trans -= 0.5;
 	else if (keycode == KEY_LEFT)
-	{
-		f->x_trans -= 0.5;
-	}
-	else if (keycode == KEY_RIGHT)
-	{
 		f->x_trans += 0.5;
-	}
+	else if (keycode == KEY_RIGHT)
+		f->x_trans -= 0.5;
 	mlx_clear_window(f->mlx,f->win);
 	func(f);
 	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
@@ -83,39 +67,31 @@ int	ft_close_mouse( t_fractol *f)
 	return (0);
 }
 
-int zoom_key_code(int keycode, int x, int y, t_fractol *f)
+double	ft_map(int to_map, double max, double min ,double width, double x, double y)
 {
-	if(keycode == 4)
-	{
-		f->MAX_ITERATIONS += 20;
-		zoom(x,y,ZOOM_COEF,f);
-	}
-	if(keycode == 5)
-	{
-		f->MAX_ITERATIONS -= 20;
-		zoom(x,y,1.0 / ZOOM_COEF,f);
-	}
-	return 0;
+	return (to_map * (max - min) /  width + min) - x - y;
 }
 
-void	zoom(int x, int y,double zoom, t_fractol *f)
+int	zoom(int keycode,int x, int y, t_fractol *f)
 {
 	double cx;
 	double cy;
 
-	double new_cx;
-	double new_cy;
-
+	double newx;
+	double newy;
 	mlx_clear_window(f->mlx,f->win);
-	cx = ft_map(x,f->width,f->min_r,f->max_r,0,0);
-	cy = ft_map(y,f->width,f->min_i,f->max_i,0,0);
-	f->max_r = (f->max_r - cx) / zoom;
-	f->min_r = (f->min_r - cx) / zoom;
-	f->max_i = (f->max_i - cy) / zoom;
-	f->min_i = (f->min_i - cy) / zoom;
-	new_cx = ft_map(new_cx,f->width,f->min_r,f->max_r,cx,cy);
-	new_cy = ft_map(new_cy,f->width,f->min_r,f->max_r,new_cy,cy);
-	
+	cx = ft_map(x,f->max + f->zoom,f->min - f->zoom,f->height,0,0);
+	cy = ft_map(y,f->max + f->zoom,f->min - f->zoom,f->height,0,0);
+	if (keycode == 4)
+		f->zoom *= 1.1;
+	if (keycode == 5)
+		f->zoom /= 1.1;
+	newx = ft_map(x,f->max + f->zoom,f->min - f->zoom,f->height,0,0);
+	newy = ft_map(y,f->max + f->zoom,f->min - f->zoom,f->height,0,0);
+
+	f->max += cx - newx;
+	f->min += cy - newy;
 	func(f);
 	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
+	return(0);
 }
