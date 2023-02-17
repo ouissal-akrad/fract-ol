@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:15:38 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/17 01:20:02 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/17 06:21:31 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void func(t_fractol *p ,int ac)
 {
 	if (ac == 4)
 	{
+		
 		if (!ftt_isdigit(p->tmp_av[2]) || !ftt_isdigit(p->tmp_av[3]))
 			ft_error();
 		if(ft_strcmp(p->tmp_av[1],"Julia") == 0 && ft_strlen(p->tmp_av[1]) == 5)
