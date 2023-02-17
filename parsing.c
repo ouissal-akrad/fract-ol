@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:13:37 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/16 17:28:18 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/17 01:18:15 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,29 @@ int	ft_strcmp(char *s1, char *s2)
 	while ((s1[i] != '\0' || s2[i] != '\0') && s1[i] == s2[i])
 		i++;
 	return (s1[i] - s2[i]);
+}
+
+int	ftt_isdigit(char *av)
+{
+	int i;
+	int c;
+	i = 0;
+	c = 0;
+	if (av[0] == '-')
+		i++;
+	while (av[i])
+	{
+		if ((av[i] < '0' && av[i] > '9') && av[i] != '.')
+			return (0);
+		if (av[i] == '.')
+			c++;
+		i++;
+	}
+	if (c > 1)
+		return 0;
+	if (i == 1 && av[0] == '-')
+		return 0;
+	return (1);
 }
 
 double	ft_atof(char *str)
@@ -69,7 +92,7 @@ void	ft_error(void)
 	write(2, "| Tricorn => ./fractol Tricorn                                           |\n", 76);
 	write(2, "| Burning_ship => ./fractol Burning_ship                                 |\n", 76);
 	write(2, "--------------------------------------------------------------------------\n", 76);
-	exit(2);
+	exit(1);
 }
 
 void ft_init(t_fractol *p)
@@ -98,8 +121,9 @@ int main(int ac, char *av[])
 	p.img = mlx_new_image(p.mlx, p.width, p.height);
 	p.addr = mlx_get_data_addr(p.img, &p.bits_per_pixel, &p.line_length,&p.endian);
 	p.tmp_av = av;
-	if(ac == 2 || ac == 4)
-		func(&p);
+	p.tmp_ac = ac;
+	if(p.tmp_ac == 2 || p.tmp_ac == 4)
+		func(&p ,p.tmp_ac);
 	else
 		ft_error();
 	mlx_put_image_to_window(p.mlx, p.win, p.img, 0, 0);

@@ -6,22 +6,36 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:15:38 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/16 17:28:32 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/17 01:20:02 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void func(t_fractol *p)
+void func(t_fractol *p ,int ac)
 {
-	if(ft_strcmp(p->tmp_av[1],"Julia") == 0)
-		julia(p,p->tmp_av);
-	if(ft_strcmp(p->tmp_av[1],"Mandelbrot") == 0)
-		mandelbrot(p);
-	if(ft_strcmp(p->tmp_av[1],"Tricorn") == 0)
-		tricorn(p);
-	if(ft_strcmp(p->tmp_av[1],"Burning_ship") == 0)
-		burning_ship(p);
+	if (ac == 4)
+	{
+		if (!ftt_isdigit(p->tmp_av[2]) || !ftt_isdigit(p->tmp_av[3]))
+			ft_error();
+		if(ft_strcmp(p->tmp_av[1],"Julia") == 0 && ft_strlen(p->tmp_av[1]) == 5)
+			julia(p,p->tmp_av);
+		else
+			ft_error();
+	}
+	else if (ac == 2)
+	{
+		if(ft_strcmp(p->tmp_av[1],"Mandelbrot") == 0&& ft_strlen(p->tmp_av[1]) == 10)
+			mandelbrot(p);
+		else if(ft_strcmp(p->tmp_av[1],"Tricorn") == 0 && ft_strlen(p->tmp_av[1]) == 7)
+			tricorn(p);
+		else if((ft_strcmp(p->tmp_av[1],"Burning_ship") == 0) && (ft_strlen(p->tmp_av[1]) == 12))
+			burning_ship(p);
+		else
+			ft_error();
+	}
+	else
+		ft_error();
 }
 void	my_mlx_pixel_put(t_fractol *data, int x, int y, int color)
 {
@@ -53,7 +67,7 @@ int key_b(int keycode, t_fractol *f)
 	else if (keycode == KEY_RIGHT)
 		f->x_trans -= 0.05;
 	mlx_clear_window(f->mlx,f->win);
-	func(f);
+	func(f,f->tmp_ac);
 	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
 	return (0);
 }
@@ -82,14 +96,20 @@ int	zoom(int keycode,int x, int y, t_fractol *f)
 	cx = ft_map(x,f->max + f->zoom,f->min - f->zoom,f->height,0,0);
 	cy = ft_map(y,f->max + f->zoom,f->min - f->zoom,f->height,0,0);
 	if (keycode == 4)
+	{
 		f->zoom *= 1.1;
+		f->iteration += 20;
+	}
 	if (keycode == 5)
+	{
 		f->zoom /= 1.1;
+		f->iteration += 20;
+	}
 	newx = ft_map(x,f->max + f->zoom,f->min - f->zoom,f->height,0,0);
 	newy = ft_map(y,f->max + f->zoom,f->min - f->zoom,f->height,0,0);
 	f->x_trans += -cx + newx;
 	f->y_trans += -cy + newy;
-	func(f);
+	func(f,f->tmp_ac);
 	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
 	return(0);
 }
