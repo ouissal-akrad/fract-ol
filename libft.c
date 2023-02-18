@@ -6,24 +6,12 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:17:24 by ouakrad           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/02/18 02:55:21 by ouakrad          ###   ########.fr       */
-=======
-/*   Updated: 2023/02/17 06:03:53 by ouakrad          ###   ########.fr       */
->>>>>>> origin/master
+/*   Updated: 2023/02/18 03:28:13 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-<<<<<<< HEAD
-=======
-int	check(int c)
-{
-	return (c >= '0' && c <= '9');
-}
-
->>>>>>> origin/master
 int	ft_strlen(const char *str)
 {
 	int	i;
@@ -66,7 +54,6 @@ int	ft_isdigit(char *av)
 	}
 	return (1);
 }
-<<<<<<< HEAD
 
 double	ft_sign(char c)
 {
@@ -77,9 +64,6 @@ double	ft_sign(char c)
 	return (1);
 }
 
-=======
-    
->>>>>>> origin/master
 double	ft_atof(char *str)
 {
 	double	sign;
@@ -87,28 +71,12 @@ double	ft_atof(char *str)
 	int		i;
 	int		power;
 
-<<<<<<< HEAD
 	i = 0;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
 	sign = ft_sign(str[i++]);
 	value = 0.0;
 	while (str[i] >= '0' && str[i] <= '9')
-=======
-	sign = 1.0;
-	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	else if (str[i] == '+')
-		i++;
-	value = 0.0;
-	while (check(str[i]))
->>>>>>> origin/master
 	{
 		value = value * 10.0 + (str[i] - '0');
 		i++;
@@ -116,11 +84,7 @@ double	ft_atof(char *str)
 	if (str[i] == '.')
 		i++;
 	power = 1.0;
-<<<<<<< HEAD
 	while (str[i] >= '0' && str[i] <= '9')
-=======
-	while (check(str[i]))
->>>>>>> origin/master
 	{
 		value = value * 10.0 + (str[i] - '0');
 		power *= 10;
@@ -128,7 +92,3 @@ double	ft_atof(char *str)
 	}
 	return (sign * value / power);
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master

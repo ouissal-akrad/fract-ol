@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:13:37 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/18 03:12:43 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/18 03:29:30 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	helper(t_fractol *p, int ac)
 		else if ((ft_strcmp(p->tmp_av[1], "Burning_ship") == 0)
 			&& (ft_strlen(p->tmp_av[1]) == 12))
 			burning_ship(p);
+		else
+			ft_error();
 	}
 	else
 		ft_error();
