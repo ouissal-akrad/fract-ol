@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 22:15:38 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/18 06:10:30 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/18 09:20:46 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	my_mlx_pixel_put(t_fractol *data, int x, int y, int color)
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
-
 
 int	key_b(int keycode, t_fractol *f)
 {
@@ -48,9 +47,9 @@ int	zoom(int keycode, int x, int y, t_fractol *f)
 	(void) x;
 	(void) y;
 	mlx_clear_window(f->mlx, f->win);
-	if(keycode == ZOOM_IN)
+	if (keycode == ZOOM_IN)
 		f->zoom *= 1.1;
-	if(keycode == ZOOM_OUT)
+	if (keycode == ZOOM_OUT)
 		f->zoom /= 1.1;
 	helper(f, f->tmp_ac);
 	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 19:55:18 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/18 04:28:13 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/18 09:21:17 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ typedef struct fractol
 	int		tmp_ac;
 	double	cx;
 	double	cy;
-	double coef;
 
 }t_fractol;
 

@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:13:37 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/18 04:28:23 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/18 09:21:34 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_init(t_fractol *p)
 	p->color_code = 0xE7FE0000;
 	p->max = 0;
 	p->min = 0;
-	p->coef = 0.8;
 	p->width = 900.0;
 	p->height = 900.0;
 	p->x_trans = 0;
