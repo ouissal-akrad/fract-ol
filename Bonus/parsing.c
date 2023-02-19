@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:13:37 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/18 03:29:30 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/19 20:17:42 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void	ft_init(t_fractol *p)
 	p->zoom = 2.0;
 	p->mlx = mlx_init();
 	if (p->mlx == NULL )
-		exit(1);
-	p->win = mlx_new_window(p->mlx, p->width, p->height, "Fract-ol");
-	if (p->win == NULL)
 		exit(1);
 	p->img = mlx_new_image(p->mlx, p->width, p->height);
 	if (p->img == NULL)
@@ -87,7 +84,7 @@ void	ft_error(void)
 	write(1, "\033[0;36m|   Burning_ship => ./fractol Burning_ship      |\n", 59);
 	write(1, "\033[0;36m|                                               |\n", 59);
 	write(1, "\033[0;36m|-----------------------------------------------|\n", 59);
-	exit(1);
+	exit(0);
 }
 
 void	controls(void)

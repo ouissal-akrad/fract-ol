@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:19:04 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/18 03:27:58 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/19 20:16:56 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 int	main(int ac, char *av[])
 {
 	t_fractol	p;
-	int			i;
 
-	i = 0;
 	ft_init(&p);
 	p.tmp_av = av;
 	p.tmp_ac = ac;
@@ -25,6 +23,9 @@ int	main(int ac, char *av[])
 	{
 		helper(&p, p.tmp_ac);
 		controls();
+		p.win = mlx_new_window(p.mlx, p.width, p.height, "Fract-ol");
+		if (p.win == NULL)
+			exit(1);
 	}
 	else
 		ft_error();

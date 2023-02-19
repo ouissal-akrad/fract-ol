@@ -6,7 +6,7 @@
 /*   By: ouakrad <ouakrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:13:37 by ouakrad           #+#    #+#             */
-/*   Updated: 2023/02/18 09:21:34 by ouakrad          ###   ########.fr       */
+/*   Updated: 2023/02/19 20:16:08 by ouakrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void	ft_init(t_fractol *p)
 	p->zoom = 2.0;
 	p->mlx = mlx_init();
 	if (p->mlx == NULL )
-		exit(1);
-	p->win = mlx_new_window(p->mlx, p->width, p->height, "Fract-ol");
-	if (p->win == NULL)
 		exit(1);
 	p->img = mlx_new_image(p->mlx, p->width, p->height);
 	if (p->img == NULL)
